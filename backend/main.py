@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from database import Base, engine
 from models import user, product
-from routers import auth
+from routers import auth, products, pricing
 
 ## Create the database tables based on the defined SQLAlchemy models.
 
@@ -37,6 +37,8 @@ app.add_middleware(
 ## The auth router is included in the main FastAPI application, which means that all
 #  the endpoints defined in auth.py will be available under the /auth prefix.
 app.include_router(auth.router)
+app.include_router(products.router)
+app.include_router(pricing.router)
 
 @app.get("/")
 def root():
